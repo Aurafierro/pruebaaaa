@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú</title>
+    
+    <link rel="stylesheet" href="../frond-end/css/index.css">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    
+    <div class="sidebar">
+        <h2>Shoes Store</h2>
+        <nav>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Clientes</a>
+                    <ul class="submenu">
+                        <li><a href="../frond-end/index.html">Clientes</a></li>
+                        <li><a href="../frond-end/NuevoCliente.html">Agregar nuevo cliente</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Ventas</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="content">
+        <h2>Clientes</h2>
+        <div class="mb-3"> 
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="filtroNombre" class="form-label">Filtrar por Nombre:</label>
+                    <input type="text" class="form-control" id="filtroNombre">
+                </div>
+                <div class="col-md-4">
+                    <label for="filtroCiudad" class="form-label">Filtrar por Ciudad:</label>
+                    <input type="text" class="form-control" id="filtroCiudad">
+                </div>
+                <div class="col-md-4">
+                    <label for="filtroEstado" class="form-label">Filtrar por Estado:</label>
+                    <input type="text" class="form-control" id="filtroEstado">
+                </div>
+            </div>
+        </div>
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>Tipo de documento</th>
+                    <th>Identificación</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
+                    <th>Estado</th>
+                    <th>Opciones</th>
+                    
+                </tr>
+            </thead>
+            <tbody id="cuerpoTabla"></tbody>
+        </table>
+    </div>
+    
+   
+</body>
+</html>
+
+<!--BOTONES
+    <div class="col col-xl-6 col-12">
+        <b><label for="">Estado *</label></b>
+        <select name="" id="estado" class="form-select" onfocusout="validarEstado(this);">
+            <option value="" selected disabled style="font-weight: bold;">Selecciona una opción</option>
+            <option value="H" style="color:green; font-weight: bold;">Habilitado</option>
+            <option value="D" style="color: red; font-weight: bold;">Deshabilitado</option>
+        </select>
+    </div>-->
