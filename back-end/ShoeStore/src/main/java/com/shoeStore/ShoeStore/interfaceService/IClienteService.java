@@ -16,7 +16,11 @@ public interface IClienteService   {
 	public int delete (String id);
 	
 	
-	public List<cliente> filtroClienteI(String identificacion);
+	public List<cliente> filtroClienteI(String nombre);
+	
+	public List<cliente> filtroClienteCiudad(String ciudad);
+	 
+	
 	
 	
 

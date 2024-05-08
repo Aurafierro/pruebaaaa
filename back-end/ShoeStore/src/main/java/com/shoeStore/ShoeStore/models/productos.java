@@ -17,30 +17,33 @@ public class productos {
 	private String id_productos;
 	
 	
-	@Column(name="nombre_del_producto", nullable= false, length = 20)
+	@Column(name="nombre_del_producto", nullable= false, length = 45)
 	private String nombre_del_producto;
 	
-	@Column(name="descripcion", nullable= false, length = 20)
+	@Column(name="descripcion", nullable= false, length = 45)
 	private String descripcion;
 
-	@Column(name="cantidad", nullable= false, length = 20)
+	@Column(name="cantidad", nullable= false)
 	private int cantidad;
 	
-	@Column(name="precio", nullable= false, length = 20)
+	@Column(name="precio", nullable= false)
 	private double precio;
-	
+
 	@Column(name="porcentaje_iva", nullable= false, length = 20)
 	private int porcentaje_iva;
 	
 	@Column(name="porcentaje_descuento", nullable= false, length = 20)
 	private int porcentaje_descuento;
 
+	@Column(name="estado", nullable= false, length =10)
+	private estado estado;
+
 	public productos() {
 		super();
 	}
 
 	public productos(String id_productos, String nombre_del_producto, String descripcion, int cantidad, double precio,
-			int porcentaje_iva, int porcentaje_descuento) {
+			int porcentaje_iva, int porcentaje_descuento, com.shoeStore.ShoeStore.models.estado estado) {
 		super();
 		this.id_productos = id_productos;
 		this.nombre_del_producto = nombre_del_producto;
@@ -49,6 +52,7 @@ public class productos {
 		this.precio = precio;
 		this.porcentaje_iva = porcentaje_iva;
 		this.porcentaje_descuento = porcentaje_descuento;
+		this.estado = estado;
 	}
 
 	public String getId_productos() {
@@ -106,6 +110,19 @@ public class productos {
 	public void setPorcentaje_descuento(int porcentaje_descuento) {
 		this.porcentaje_descuento = porcentaje_descuento;
 	}
-	
+
+	public estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(estado estado) {
+		this.estado = estado;
+	}
+
+	public boolean contieneCamposVacios() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 }

@@ -2,10 +2,14 @@ package com.shoeStore.ShoeStore.interfaces;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+
 import org.springframework.stereotype.Repository;
 
+
 import com.shoeStore.ShoeStore.models.cliente;
+
 
 
 
@@ -13,7 +17,23 @@ import com.shoeStore.ShoeStore.models.cliente;
 public interface ICliente  extends CrudRepository<cliente,String>{
 
 
-	  List<cliente> findByIdentificacion(String identificacion);
+	  
+	@Query("SELECT c FROM cliente c WHERE "
+	        + "c.nombre LIKE %?1% OR "
+	        + "c.apellido LIKE %?1%")
+	List<cliente> filtroClienteI(String nombre);
+
+
+	@Query("SELECT c FROM cliente c WHERE "
+	        + "c.ciudad LIKE %?1%")
+	List<cliente> filtroClienteCiudad(String ciudad);
+
+
+	
+	
+				
+		
+
 
 	
 }

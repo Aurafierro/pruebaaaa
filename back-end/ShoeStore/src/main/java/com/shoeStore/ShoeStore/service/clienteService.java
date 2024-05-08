@@ -13,6 +13,7 @@ import com.shoeStore.ShoeStore.models.cliente;
 
 
 
+
 @Service
 public class clienteService implements IClienteService {
 
@@ -50,9 +51,23 @@ public class clienteService implements IClienteService {
 		return 1;
 	}
 	@Override
-	public List<cliente> filtroClienteI(String identificacion) {
-	    return data.findByIdentificacion(identificacion);
+	public List<cliente> filtroClienteI(String nombre) {
+		List<cliente> listaCliente=data.filtroClienteI(nombre);
+		return listaCliente;
 	}
+	
+	
+	
+	
+  
+	@Override
+	public List<cliente> filtroClienteCiudad(String ciudad) {
+		List<cliente> listaCliente=data.filtroClienteCiudad(ciudad);
+				return listaCliente;
+	}
+
+	
+	
 
 
 }

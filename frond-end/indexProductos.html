@@ -9,7 +9,7 @@
    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
 </head>
-<body onload="listarCliente();" >
+<body>
     
     <div class="sidebar">
         <h2>Shoes Store</h2>
@@ -24,8 +24,9 @@
                 </li>
                 <li><a href="#">Productos</a>
                     <ul class="submenu">
-                        <li><a href="../frond-end/indexProductos.html">Listar productos</a></li>
+                        <li><a href="./indexProductos.html">Listar productos</a></li>
                         <li><a href="../frond-end/NuevoProducto.html">Agregar nuevo producto</a></li>
+
                     </ul>
                 </li>
                 
@@ -35,17 +36,14 @@
     </div>
 
     <div class="content">
-        <h2>Clientes</h2>
+        <h2>Productos</h2>
         <div class="mb-3"> 
             <div class="row">
                 <div class="col-md-4">
                     <label for="filtroNombre" class="form-label">Filtrar por Nombre:</label>
                     <input type="text" class="form-control" id="inputSearch">
                 </div>
-                <div class="col-md-4">
-                    <label for="filtroCiudad" class="form-label">Filtrar por Ciudad:</label>
-                    <input type="text" class="form-control" id="inputSearch">
-                </div>
+                
                 <div class="col-md-4">
                     <label for="filtroEstado" class="form-label">Filtrar por Estado:</label>
                     <input type="text" class="form-control" id="inputSearch">
@@ -58,15 +56,14 @@
         <table class="table table-dark table-striped">
             <thead>
                 <tr>
-                    <th>Tipo de documento</th>
-                    <th>Identificación</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Teléfono</th>
-                    <th>Correo</th>
-                    <th>Dirección</th>
+                    <th>Nombre del producto</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>IVA</th>
+                    <th>Descuento</th>
                     <th>Estado</th>
-                    <th>Opciones</th>
+                    <th>Acciones</th>
                     
                 </tr>
             </thead>
@@ -74,16 +71,6 @@
         </table>
     </div>
     
-   <script src="./js/cliente.js"></script>
+   
 </body>
 </html>
-
-<!--BOTONES
-    <div class="col col-xl-6 col-12">
-        <b><label for="">Estado *</label></b>
-        <select name="" id="estado" class="form-select" onfocusout="validarEstado(this);">
-            <option value="" selected disabled style="font-weight: bold;">Selecciona una opción</option>
-            <option value="H" style="color:green; font-weight: bold;">Habilitado</option>
-            <option value="D" style="color: red; font-weight: bold;">Deshabilitado</option>
-        </select>
-    </div>-->
