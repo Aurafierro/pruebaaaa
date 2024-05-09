@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shoeStore.ShoeStore.interfaceService.IClienteService;
@@ -37,14 +37,13 @@ public class clientecontroller {
 	@PostMapping("/")
 	public ResponseEntity<Object> save(@ModelAttribute("cliente") cliente cliente) {
 		    
-		    List<cliente> clientes = clienteService.filtroClienteI(cliente.getIdentificacion());
+		    List<cliente> clientes = clienteService.filtroCliente(cliente.getIdentificacion());
 		    if (!clientes.isEmpty()) {
 		        return new ResponseEntity<>("El cliente ya tiene un ingreso activo", HttpStatus.BAD_REQUEST);
 		    }
-		    if (cliente.getIdentificacion().equals("")) {
-
-	            return new ResponseEntity<>("Tú identificación  es un campo obligatorio", HttpStatus.BAD_REQUEST);
-	        }
+		    if (cliente.getIdentificacion() == null || cliente.getIdentificacion().equals("")) {
+		        return new ResponseEntity<>("La identificación es un campo obligatorio", HttpStatus.BAD_REQUEST);
+		    }
 
 	        if (cliente.getNombre().equals("")) {
 	            
@@ -70,10 +69,10 @@ public class clientecontroller {
 	            
 	            return new ResponseEntity<>("El nombre de tu ciudad es un campo obligatorio", HttpStatus.BAD_REQUEST);
 	        }
-            if (cliente.getCorreo().equals("")) {
-	            
+	        if (cliente.getCorreo() == null || cliente.getCorreo().isEmpty()) {
 	            return new ResponseEntity<>("El correo es un campo obligatorio", HttpStatus.BAD_REQUEST);
 	        }
+
 	        if (cliente.getEstado().equals("")) {
 	            
 	            return new ResponseEntity<>("El estado es un campo obligatorio", HttpStatus.BAD_REQUEST);
@@ -91,19 +90,12 @@ public class clientecontroller {
 		}
 		
 		//filtro
+		//filtro
 		@GetMapping("/busquedafiltro/{filtro}")
-		public ResponseEntity<Object> findFiltro(@PathVariable String filtro, @RequestParam("valor") String valor) {
-		    List<cliente> listaClientes;
-		    if (filtro.equals("ciudad")) {
-		        listaClientes = clienteService.filtroClienteCiudad(valor);
-		    } else if (filtro.equals("nombre")) {
-		        listaClientes = clienteService.filtroClienteI(valor);
-		    } else {
-		        return new ResponseEntity<>("Filtro no válido", HttpStatus.BAD_REQUEST);
-		    }
-		    return new ResponseEntity<>(listaClientes, HttpStatus.OK);
+		public ResponseEntity<Object>findFiltro(@PathVariable String filtro){
+			var ListaCliente = clienteService.filtroCliente(filtro);
+			return new ResponseEntity<>(ListaCliente, HttpStatus.OK);
 		}
-
 		
 		//@PathVariable recibe una variable por el enlace
 		
@@ -146,7 +138,7 @@ public class clientecontroller {
 					if (cliente != null) {
 				        if (!cliente.getIdentificacion().equals(clienteUpdate.getIdentificacion())) {
 				            // El número de documento se está cambiando, verificar si ya está en uso
-				            List<cliente> clientesConMismoDocumento = clienteService.filtroClienteI(clienteUpdate.getIdentificacion());
+				            List<cliente> clientesConMismoDocumento = clienteService.filtroCliente(clienteUpdate.getIdentificacion());
 				            if (!clientesConMismoDocumento.isEmpty()) {
 				                // Si hay otros médicos con el mismo número de documento, devuelve un error
 				                return new ResponseEntity<>("El cliente ya tiene un ingreso activo", HttpStatus.BAD_REQUEST);

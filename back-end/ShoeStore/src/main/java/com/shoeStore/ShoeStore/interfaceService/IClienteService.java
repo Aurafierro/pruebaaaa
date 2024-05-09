@@ -15,10 +15,8 @@ public interface IClienteService   {
 	public Optional<cliente> findOne(String id);
 	public int delete (String id);
 	
+    public List<cliente> filtroCliente(String filtro);
 	
-	public List<cliente> filtroClienteI(String nombre);
-	
-	public List<cliente> filtroClienteCiudad(String ciudad);
 	 
 	
 	

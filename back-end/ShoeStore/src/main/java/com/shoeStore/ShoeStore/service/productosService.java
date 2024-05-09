@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.shoeStore.ShoeStore.interfaceService.IProductosService;
 import com.shoeStore.ShoeStore.interfaces.IProductos;
+
 import com.shoeStore.ShoeStore.models.productos;
 
 @Service
@@ -47,6 +48,11 @@ public class productosService implements IProductosService {
 		return 1;
 	}
 	
+	@Override
+	public List<productos> filtroProdutos(String filtro) {
+		List <productos> listaProducto=data.filtroProductos(filtro);
+		return listaProducto;
+	}
 
 
 }

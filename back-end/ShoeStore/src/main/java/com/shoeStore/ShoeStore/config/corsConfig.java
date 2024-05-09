@@ -16,6 +16,7 @@ public class corsConfig {
 		//permitir solicitudes desde todos los origenes
 		//config.addAllowwedOrigin("*");
 		config.addAllowedOrigin("http://127.0.0.1:5500/");
+		
 		config.addAllowedOrigin("http://localhost:5500/");
 		
 		//Permitir solicitudes con estos metodos HTTP

@@ -1,129 +1,106 @@
 var url = "http://localhost:8080/api/v1/cliente/";
 
-
 function listarCliente() {
- 
- /* var capturarFiltro = document.getElementById("inputSearch").value;
-  var urlLocal=url;
-  if (capturarFiltro!=""){
-    urlLocal+="busquedafiltro/"+capturarFiltro;
-  }*/
-  
-  $.ajax({
-    url: urlLocal,
-    type: "GET",
-    success: function (result) {
-      //success: funcion que se ejecuta
-      //cuando la peticion tiene exito
-      console.log(result);
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (result) {
+            console.log(result);
+            var cuerpoTabla = document.getElementById("cuerpoTabla");
+            cuerpoTabla.innerHTML = "";
+            for (var i = 0; i < result.length; i++) {
+                var trRegistro = document.createElement("tr");
 
-      var cuerpoTabla = document.getElementById("cuerpoTabla");
-      //Se limpia el cuepro de la tabla
-      cuerpoTabla.innerHTML = "";
-      //se hace un ciclo que recorra l arreglo con los datos
-      for (var i = 0; i < result.length; i++) {
-        //UNA ETIQUETA tr por cada registro
-        var trResgistro = document.createElement("tr");
+                
 
-        
-        var celdaTipoDocumento = document.createElement("th")
-        let celdaIdentificacion = document.createElement("th")
-        let celdaNombre = document.createElement("th")
-        let celdaApellido = document.createElement("th")
-        let celdaTelefono = document.createElement("th")
-        let celdaCorreo = document.createElement("th")
-        let celdaDireccion = document.createElement("th")
-        let celdaCiudad = document.createElement("th")
-        let celdaEstado = document.createElement("th")
-
-
-        let celdaOpciones = document.createElement("th");
-        let botonEditarCliente = document.createElement("button");
-        botonEditarCliente.value=result[i]["id_cliente"];
-        botonEditarCliente.innerHTML = "Editar";
+                let celdaTipoDocumento = document.createElement("td")
+                let celdaIdentificacion = document.createElement("td")
+                let celdaNombre = document.createElement("td")
+                let celdaApellido = document.createElement("td")
+                let celdaTelefono = document.createElement("td")
+                let celdaCorreo = document.createElement("td")
+                let celdaDireccion = document.createElement("td")
+                let celdaCiudad = document.createElement("td")
+                let celdaEstado = document.createElement("td")
+                let celdaOpcion = document.createElement("td");
+                let botonEditarCliente = document.createElement("button");
+                botonEditarCliente.value=result[i]["id_cliente"];
+                botonEditarCliente.innerHTML = "Editar";
         
         botonEditarCliente.onclick=function(e){
           $('#exampleModal').modal('show');
-          consultarMedicoID(this.value);
+          consultarClienteID(this.value);
         }
 
         botonEditarCliente.className = "btn btn-warning editar-cliente";
 
+
+                celdaTipoDocumento.innerText = result[i]["tipo_documento"];
+                celdaIdentificacion.innerText = result[i]["identificacion"];
+                celdaNombre.innerText = result[i]["nombre"];
+                celdaApellido.innerText = result[i]["apellido"];
+                celdaTelefono.innerText = result[i]["telefono"];
+                celdaCorreo.innerText = result[i]["correo"];
+                celdaDireccion.innerText = result[i]["direccion"];
+                celdaCiudad.innerText = result[i]["ciudad"];
+                celdaEstado.innerText = result[i]["estado"];
+                
+                
+                
+
+                trRegistro.appendChild(celdaTipoDocumento);
+                trRegistro.appendChild(celdaIdentificacion);
+                trRegistro.appendChild(celdaNombre);
+                trRegistro.appendChild(celdaApellido);
+                trRegistro.appendChild(celdaTelefono);
+                trRegistro.appendChild(celdaCorreo);
+                trRegistro.appendChild(celdaDireccion);
+                trRegistro.appendChild(celdaCiudad);
+                trRegistro.appendChild(celdaEstado);
+                
+                celdaOpcion.appendChild(botonEditarCliente);
+              
         
-       
-        celdaTipoDocumento.innerText = result[i]["tipo_documento"];
-        celdaIdentificacion.innerText = result[i]["identificacion"];
-        celdaNombre.innerText = result[i]["nombre"];
-        celdaApellido.innerText = result[i]["apellido"];
-        celdaTelefono.innerText = result[i]["telefono"];
-        celdaCorreo.innerText = result[i]["correo"];
-        celdaDireccion.innerText = result[i]["direccion"];
-        celdaCiudad.innerText = result[i]["ciudad"]
-        celdaEstado.innerText = result[i]["estado"];
-
-
-      
-        trResgistro.appendChild(celdaTipoDocumento);
-        trResgistro.appendChild(celdaIdentificacion);
-        trResgistro.appendChild(celdaNombre);;
-        trResgistro.appendChild(celdaApellido);
-        trResgistro.appendChild(celdaTelefono);
-        trResgistro.appendChild(celdaCorreo);
-        trResgistro.appendChild(celdaDireccion);
-        trResgistro.appendChild(celdaCiudad);
-        trResgistro.appendChild(celdaEstado);
-
-
-        celdaOpciones.appendChild(botonEditarCliente);
-        trResgistro.appendChild(celdaOpciones)
-
-       
-        cuerpoTabla.appendChild(trResgistro);
-
-
-        //creamos un td por cada campo de resgistro
-
-      }
-    },
-    error: function (error) {
-      
-      alert("Error en la petición " + error);
-    }
-  })
-  
+               
+               
+        
+        
+                cuerpoTabla.appendChild(trRegistro);
+            }
+        },
+        error: function (error) {
+            alert("Error en la petición " + error);
+        }
+    })
 }
 
-function registrarClientee() {
 
+function registrarCliente() {
+    let tipoDocumento = document.getElementById("tipo_documento").value;
 
-    let formData = {
-      "tipo_documento": document.getElementById("tipo_documento").value,
-      "identificación": document.getElementById("identificación").value,
-      "nombre": document.getElementById("nombre").value,
-      "apellido": document.getElementById("apellido").value,
-      "telefono": document.getElementById("telefono").value,
-      "correo": document.getElementById("correo").value,
-      "direccion": document.getElementById("direccion").value,
-      "ciudad": document.getElementById("ciudad").value,
-      "estado": document.getElementById("estado")
-  
-    };
-  
-    let camposValidos = true;
-    let camposRequeridos = [
-        "tipo_documento",
-        "identificacion",
-        "nombre",
-        "apellido",
-        "telefono",
-        "correo",
-        "direccion",
-        "ciudad",
-        "estadoInput"
-    ];
-  
-    
-    if (camposValidos) {
+    let identificacion = document.getElementById("identificacion").value;
+    let nombre = document.getElementById("nombre").value;
+    let apellido = document.getElementById("apellido_cliente").value;
+    let telefono = document.getElementById("telefono").value;
+    let correo = document.getElementById("correo").value;
+    let direccion = document.getElementById("direccion_cliente").value;
+    let ciudad = document.getElementById("ciudad").value;
+    let estado = document.getElementById("estado_cliente").value;
+
+    // Verificar que los campos requeridos no estén vacíos
+    if (tipoDocumento && identificacion && nombre && apellido && telefono && correo && direccion && ciudad && estado) {
+        let formData = {
+            "tipo_documento": tipoDocumento,
+            "identificacion": identificacion,
+            "nombre": nombre,
+            "apellido": apellido,
+            "telefono": telefono,
+            "correo": correo,
+            "direccion": direccion,
+            "ciudad": ciudad,
+            "estado": estado
+        };
+
         $.ajax({
             url: url,
             type: "POST",
@@ -134,13 +111,12 @@ function registrarClientee() {
                     text: "Se guardó correctamente",
                     icon: "success"
                 });
-                limpiarMedico();
+                limpiarCliente();
             },
             error: function (error) {
                 Swal.fire("Error", "Error al guardar, " + error.responseText, "error");
             },
         });
-  
     } else {
         Swal.fire({
             title: "¡Error!",
@@ -148,8 +124,8 @@ function registrarClientee() {
             icon: "error"
         });
     }
-  
-  }
+}
+
 
 
   //ValidadIdentificación
@@ -234,7 +210,7 @@ function validarTelefono(cuadroNumero) {
   
   var valor = cuadroNumero.value;
   var valido = true;
-  if (valor.length < 10 || valor.length > 15) {
+  if (valor.length < 10 || valor.length > 12) {
     valido = false
   }
 
@@ -303,7 +279,7 @@ function validarDireccion(cuadroNumero) {
 
 function validarCampos() {
     var ciudad = document.getElementById("ciudad");
-    return validarCiudad(direccion);
+    return validarCiudad(ciudad);
   }
   function validarCiudad(cuadroNumero) {
     
@@ -346,3 +322,101 @@ function validarEstado(cuadroNumero) {
     }
     return valido;
 }
+
+
+function consultarClienteID(id){
+    //alert(id);
+    $.ajax({
+        url:url+id,
+        type:"GET",
+        success: function(result){
+           
+            document.getElementById("tipo_documento").value=result["tipo_documento"];
+            document.getElementById("identificacion").value=result["identificacion"];
+            document.getElementById("nombre").value=result["nombre"];
+            document.getElementById("apellido_cliente").value=result["apellido_cliente"];
+           
+            document.getElementById("telefono").value=result["telefono"];
+            document.getElementById("correo").value=result["correo"];
+            document.getElementById("direccion").value=result["direccion_cliente"];
+            document.getElementById("ciudad").value=result["ciudad"];
+            document.getElementById("estado").value=result["estado_cliente"];
+        }
+    });
+  }
+  
+  
+  
+  function actualizarCliente() { 
+    var id_cliente=document.getElementById("id_cliente").value
+    let formData={
+        "tipo_documento": document.getElementById("tipo_documento").value,
+        "identificacion": document.getElementById("identificacion").value,
+        "nombre": document.getElementById("nombre").value,
+        "apellido_cliente": document.getElementById("apellido_cliente").value,
+        "telefono": document.getElementById("telefono").value,
+        "correo": document.getElementById("correo").value,
+        "direccion_cliente": document.getElementById("direccion_cliente").value,
+        "ciudad": document.getElementById("ciudad").value,
+        "estado_cliente": document.getElementById("estado_cliente").value
+  };
+  
+  if (validarCampos()) {
+    $.ajax({
+        url:url+id_cliente,
+        type: "PUT",
+        data: formData,
+      
+        
+        success: function(result) {
+          
+            // Manejar la respuesta exitosa según necesites
+            Swal.fire({
+                title: "¡Excelente!",
+                text: "Se guardó correctamente",
+                icon: "success"
+              });
+            // Puedes hacer algo adicional como recargar la lista de médicos
+            listarCliente();
+        },
+        error: function(error) {
+            // Manejar el error de la petición
+            Swal.fire({
+                title: "¡Error!",
+                text: "No se guardó",
+                icon: "error"
+              });
+        },
+        error: function (error) {
+          Swal.fire("Error", "Error al guardar, " + error.responseText, "error");
+      }
+    });
+    } else {
+    Swal.fire({
+        title: "¡Error!",
+        text: "Llene todos los campos correctamente",
+        icon: "error"
+      });
+    }
+    function validarCampos() {
+      // Obtener los valores de los campos
+      var tipo_documento = document.getElementById("tipo_documento").value;
+      var identificacion = document.getElementById("identificacion").value;
+      var nombre = document.getElementById("nombre").value;
+      var apellido_cliente = document.getElementById("apellido_cliente").value;
+      var telefono = document.getElementById("telefono").value;
+      var correo = document.getElementById("correo").value;
+      var direccion_cliente = document.getElementById("direccion_cliente").value;
+      var ciudad = document.getElementById("ciudad").value;
+      var estado_cliente = document.getElementById("estado_cliente").value;
+    
+      // Verificar si algún campo está vacío
+      if (tipo_documento === '' || identificacion === '' || nombre === '' || apellido_cliente === '' || telefono === '' || correo === '' || direccion_cliente === '' || estado_cliente === '') {
+        return false; // Al menos un campo está vacío
+      } else {
+        return true; // Todos los campos están llenos
+      }
+    }
+    
+  }
+  

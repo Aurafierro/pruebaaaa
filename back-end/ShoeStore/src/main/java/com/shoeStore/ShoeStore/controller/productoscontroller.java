@@ -1,6 +1,7 @@
 package com.shoeStore.ShoeStore.controller;
 
-import java.util.List;
+
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,40 +35,8 @@ public class productoscontroller {
 		
 	@PostMapping("/")
 	public ResponseEntity<Object> save(@ModelAttribute("productos") productos productos) {
-		    
-		   
-		    if (productos.getNombre_del_producto().equals("")) {
-
-	            return new ResponseEntity<>("El nombre del producto es un campo obligatorio", HttpStatus.BAD_REQUEST);
-	        }
-
-	        if (productos.getDescripcion().equals("")) {
-	            
-	            return new ResponseEntity<>("La descripcion es campo obligatorio", HttpStatus.BAD_REQUEST);
-	        }
-
-	        if (productos.getCantidad() == 0) {
-	            return new ResponseEntity<>("La cantidad es un campo obligatorio", HttpStatus.BAD_REQUEST);
-	        }
-
-	        if (productos.getPrecio() == 0.0) {
-	            return new ResponseEntity<>("El precio es un campo obligatorio", HttpStatus.BAD_REQUEST);
-	        }
-
-	        if (productos.getPorcentaje_iva() == 0) {
-	            return new ResponseEntity<>("El porcentaje de IVA es un campo obligatorio", HttpStatus.BAD_REQUEST);
-	        }
-
-	        if (productos.getPorcentaje_descuento() == 0) {
-	            return new ResponseEntity<>("El porcentaje de descuento es un campo obligatorio", HttpStatus.BAD_REQUEST);
-	        }
-   
-	        if (productos.getEstado().equals("")) {
-	            
-	            return new ResponseEntity<>("El estado es un campo obligatorio", HttpStatus.BAD_REQUEST);
-	        }
-	        
-	        
+	 
+	              
 	        productosService.save(productos);
 			return new ResponseEntity<>(productos,HttpStatus.OK);
 		}
@@ -79,11 +48,11 @@ public class productoscontroller {
 		}
 		
 		//filtro
-		/*@GetMapping("/busquedafiltro/{filtro}")
+		@GetMapping("/busquedafiltro/{filtro}")
 		public ResponseEntity<Object>findFiltro(@PathVariable String filtro){
-			var Listacliente = clienteService.filtroCliente(filtro);
-			return new ResponseEntity<>(Listacliente, HttpStatus.OK);
-		}*/
+			var Listaproducto = productosService.filtroProdutos(filtro);
+			return new ResponseEntity<>(Listaproducto, HttpStatus.OK);
+		}
 		
 		//@PathVariable recibe una variable por el enlace
 		

@@ -17,16 +17,12 @@ import com.shoeStore.ShoeStore.models.cliente;
 public interface ICliente  extends CrudRepository<cliente,String>{
 
 
-	  
 	@Query("SELECT c FROM cliente c WHERE "
 	        + "c.nombre LIKE %?1% OR "
-	        + "c.apellido LIKE %?1%")
-	List<cliente> filtroClienteI(String nombre);
-
-
-	@Query("SELECT c FROM cliente c WHERE "
+	        + "c.apellido LIKE %?1% OR "
+	        + "c.ciudad LIKE %?1% OR "
 	        + "c.ciudad LIKE %?1%")
-	List<cliente> filtroClienteCiudad(String ciudad);
+	List<cliente> filtroCliente(String filtro);
 
 
 	

@@ -15,6 +15,9 @@ public interface IProductosService {
 
 	public int delete(String id_productos);
 
+	public List<productos> filtroProdutos(String filtro);
+
+	
 	
 	
 	

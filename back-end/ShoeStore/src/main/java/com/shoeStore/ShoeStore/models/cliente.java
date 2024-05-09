@@ -2,6 +2,8 @@ package com.shoeStore.ShoeStore.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,7 +18,9 @@ public class cliente {
 	@Column(name="id_liente", nullable= false, length = 36)
 	private String id_cliente;
 
-	@Column(name="tipo_documento", nullable= false, length = 20)
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="tipo_documento", nullable= true, length = 20)
 	private tipo_documento tipo_documento;
 
 	@Column(name="identificacion", nullable= false, length = 10)
@@ -38,17 +42,23 @@ public class cliente {
 	private String direccion;
 	
 
-	@Column(name="corrreo", nullable= false, length = 45)
+	@Column(name="corrreo", nullable= false, length = 100)
 	private String correo;
 	
-	
+	@Enumerated(EnumType.STRING)
 	@Column(name="estado", nullable= false, length =10)
 	private estado estado;
+
+	
+	
 
 
 	public cliente() {
 		super();
 	}
+
+
+
 
 
 	public cliente(String id_cliente, com.shoeStore.ShoeStore.models.tipo_documento tipo_documento,
@@ -68,9 +78,15 @@ public class cliente {
 	}
 
 
+
+
+
 	public String getId_cliente() {
 		return id_cliente;
 	}
+
+
+
 
 
 	public void setId_cliente(String id_cliente) {
@@ -78,9 +94,15 @@ public class cliente {
 	}
 
 
+
+
+
 	public tipo_documento getTipo_documento() {
 		return tipo_documento;
 	}
+
+
+
 
 
 	public void setTipo_documento(tipo_documento tipo_documento) {
@@ -88,9 +110,15 @@ public class cliente {
 	}
 
 
+
+
+
 	public String getIdentificacion() {
 		return identificacion;
 	}
+
+
+
 
 
 	public void setIdentificacion(String identificacion) {
@@ -98,9 +126,15 @@ public class cliente {
 	}
 
 
+
+
+
 	public String getNombre() {
 		return nombre;
 	}
+
+
+
 
 
 	public void setNombre(String nombre) {
@@ -108,9 +142,15 @@ public class cliente {
 	}
 
 
+
+
+
 	public String getApellido() {
 		return apellido;
 	}
+
+
+
 
 
 	public void setApellido(String apellido) {
@@ -118,9 +158,15 @@ public class cliente {
 	}
 
 
+
+
+
 	public String getTelefono() {
 		return telefono;
 	}
+
+
+
 
 
 	public void setTelefono(String telefono) {
@@ -128,9 +174,15 @@ public class cliente {
 	}
 
 
+
+
+
 	public String getCiudad() {
 		return ciudad;
 	}
+
+
+
 
 
 	public void setCiudad(String ciudad) {
@@ -138,9 +190,15 @@ public class cliente {
 	}
 
 
+
+
+
 	public String getDireccion() {
 		return direccion;
 	}
+
+
+
 
 
 	public void setDireccion(String direccion) {
@@ -148,9 +206,15 @@ public class cliente {
 	}
 
 
+
+
+
 	public String getCorreo() {
 		return correo;
 	}
+
+
+
 
 
 	public void setCorreo(String correo) {
@@ -158,9 +222,15 @@ public class cliente {
 	}
 
 
+
+
+
 	public estado getEstado() {
 		return estado;
 	}
+
+
+
 
 
 	public void setEstado(estado estado) {
@@ -168,15 +238,14 @@ public class cliente {
 	}
 
 
+
+
+
 	public boolean contieneCamposVacios() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	
 
-
-
-	
 	
 }

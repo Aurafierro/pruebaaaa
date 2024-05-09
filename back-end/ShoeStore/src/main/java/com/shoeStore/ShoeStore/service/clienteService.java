@@ -51,19 +51,9 @@ public class clienteService implements IClienteService {
 		return 1;
 	}
 	@Override
-	public List<cliente> filtroClienteI(String nombre) {
-		List<cliente> listaCliente=data.filtroClienteI(nombre);
+	public List<cliente> filtroCliente(String filtro) {
+		List <cliente> listaCliente=data.filtroCliente(filtro);
 		return listaCliente;
-	}
-	
-	
-	
-	
-  
-	@Override
-	public List<cliente> filtroClienteCiudad(String ciudad) {
-		List<cliente> listaCliente=data.filtroClienteCiudad(ciudad);
-				return listaCliente;
 	}
 
 	
