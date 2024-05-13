@@ -14,6 +14,7 @@ import com.shoeStore.ShoeStore.models.cliente;
 
 
 
+
 @Service
 public class clienteService implements IClienteService {
 
@@ -50,14 +51,11 @@ public class clienteService implements IClienteService {
 		data.deleteById(id_cliente);
 		return 1;
 	}
-	@Override
-	public List<cliente> filtroCliente(String filtro) {
-		List <cliente> listaCliente=data.filtroCliente(filtro);
-		return listaCliente;
-	}
-
-	
+	 @Override
+	    public List<cliente> filtroCliente(String filtro) {
+	    	List <cliente> listaCliente=data.filtroCliente(filtro);
+			return listaCliente;
 	
 
-
+	    }
 }

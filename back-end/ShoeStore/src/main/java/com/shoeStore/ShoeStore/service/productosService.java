@@ -23,7 +23,7 @@ public class productosService implements IProductosService {
 	@Override
 	public String save(productos productos) {
 		data.save(productos);
-		return productos.getId_productos();
+		return productos.getId_producto();
 	}
 
 	@Override
@@ -36,15 +36,15 @@ public class productosService implements IProductosService {
 	
 	
 	@Override
-	public Optional<productos> findOne(String id_productos) {
-		Optional<productos>producto=data.findById(id_productos);
+	public Optional<productos> findOne(String id_producto) {
+		Optional<productos>producto=data.findById(id_producto);
 		
 		return producto;
 	}
 
 	@Override
-	public int delete(String id_productos) {
-		data.deleteById(id_productos);
+	public int delete(String id_producto) {
+		data.deleteById(id_producto);
 		return 1;
 	}
 	

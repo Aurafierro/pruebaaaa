@@ -36,6 +36,7 @@
                     </ul>
                 </li>
                 
+                <li><a href="../frond-end/indexVentas.html">Listar Ventas</a></li>
                 <li><a href="../frond-end/indexVentas.html">Ventas</a></li>
             </ul>
         </nav>
@@ -43,23 +44,17 @@
 
     <div class="content">
         <h2>Clientes</h2>
-        <div class="mb-3"> 
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="filtroNombre" class="form-label">Filtrar por Nombre:</label>
-                    <input type="text" class="form-control" id="inputSearch">
-                </div>
-                <div class="col-md-4">
-                    <label for="filtroCiudad" class="form-label">Filtrar por Ciudad:</label>
-                    <input type="text" class="form-control" id="inputSearch">
-                </div>
-                <div class="col-md-4">
-                    <label for="filtroEstado" class="form-label">Filtrar por Estado:</label>
-                    <input type="text" class="form-control" id="inputSearch">
-                </div>
-            </div>
-            <div>
-                <button class="btn btn-primary" onclick="filtrarVentas();">Filtrar</button>
+        <div class="container">
+          <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+              <b><a class="navbar-brand">Filtros</a></b>
+              <form class="d-flex" role="search" return false;>
+                <input class="form-control me-2" type="search" placeholder="Buscar " aria-label="Search"
+                  id="inputSearch">
+                <button class="btn btn-outline-success" type="button" onclick="listarCliente();">Buscar</button>
+                
+              </form>
+      
             </div>
         </div>
         <table class="table table-dark table-striped">
@@ -86,7 +81,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar medico</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Cliente</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -106,41 +101,44 @@
               <label for="">Número de documento</label>
               <input type="hidden" id="id_cliente" step="1">
 
-              <input type="number" id="identificacion" step="1" class="form-control"
-                onfocusout="validarNumeroDocumento(this);" />
+              <input type="number" id="identificacion" step="1" class="form-control"   onfocusout="validarIdentificacion(this);"/>
             </div>
             <div class="col col-xl-6 col-12">
               <label for="">Primer Nombre</label>
-              <input type="text" id="nombre" class="form-control" />
+              <input type="text" id="nombre" class="form-control" onfocusout="validarNombre(this);" />
             </div>
             
             <div class="col col-xl-6 col-12">
               <label for="">Apellido</label>
-              <input type="text" id="apellido_cliente" class="form-control" />
+              <input type="text" id="apellido" class="form-control" onfocusout="validarApellido(this);" />
             </div>
             
             <div class="col col-xl-6 col-12">
               <label for="">Teléfono</label>
-              <input type="text" id="telefono" class="form-control" />
+              <input type="text" id="telefono" class="form-control" onfocusout="validarTelefono(this);" />
             </div>
             <div class="col col-xl-6 col-12">
               <label for="">Correo</label>
-              <input type="email" id="correo" class="form-control" />
+              <input type="email" id="correo" class="form-control" onfocusout="validarCorreo(this);" />
+            </div>
+            <div class="col col-xl-6 col-12">
+              <label for="">Ciudad</label>
+              <input type="text" id="ciudad" class="form-control" onfocusout="validarCiudad(this);" />
             </div>
             <div class="col col-xl-6 col-12">
               <label for="">Dirección</label>
-              <input type="text" id="direccion_cliente" class="form-control" />
+              <input type="text" id="direccion" class="form-control" onfocusout="validarDireccion(this);" />
             </div>
             <div class="col col-xl-6 col-12">
               <label for="estado">Estado</label>
-                  <select id="estado_cliente" class="form-select">
+                  <select id="estado" class="form-select">
                   <option value="" selected disabled>Seleccione una opción</option>
-                  <option value="Activado">Activo</option>
+                  <option value="Activo">Activo</option>
                   <option value="Desactivado">Desactivado</option>
                   </select>
               </div>
           </div>
-          <button class="btn btn-success" onclick="limpiarMedico();">
+          <button class="btn btn-success" onclick="limpiarCliente();">
             Limpiar
           </button>
           <button type="button" class="btn btn-primary" onclick="actualizarCliente();">Actualizar</button>
@@ -149,6 +147,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
+      
     </div>
   </div>
 

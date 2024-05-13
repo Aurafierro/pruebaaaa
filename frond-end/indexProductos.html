@@ -42,25 +42,23 @@
 
     <div class="content">
         <h2>Productos</h2>
-        <div class="mb-3"> 
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="filtroNombre" class="form-label">Filtrar por Nombre:</label>
-                    <input type="text" class="form-control" id="inputSearch">
-                </div>
-                
-                <div class="col-md-4">
-                    <label for="filtroEstado" class="form-label">Filtrar por Estado:</label>
-                    <input type="text" class="form-control" id="inputSearch">
-                </div>
-            </div>
-            <div>
-                <button class="btn btn-primary" onclick="filtrarVentas();">Filtrar</button>
-            </div>
+        <div class="container">
+            <nav class="navbar bg-body-tertiary">
+              <div class="container-fluid">
+                <b><a class="navbar-brand">Filtros</a></b>
+                <form class="d-flex" role="search" return false;>
+                  <input class="form-control me-2" type="search" placeholder="Buscar " aria-label="Search"
+                    id="inputSearch">
+                  <button class="btn btn-outline-success" type="button" onclick="listarProducto();">Buscar</button>
+                  
+                </form>
+        
+              </div>
         </div>
         <table class="table table-dark table-striped">
             <thead>
                 <tr>
+                  
                     <td>Nombre del producto</td>
                     <td>Descripción</td>
                     <td>Cantidad</td>
@@ -76,6 +74,71 @@
         </table>
     </div>
     
-   <Script src="./js/producto.js"></Script>
+    <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Producto</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            < <div class="col col-xl-6 col-12">
+                <b><label for="tipo_documento">Nombre del producto</label></b>
+                <input type="text" id="nombre_del_producto" step="1" class="form-control"   onfocusout="validarNombreProducto(this);"/>
+            </div>
+
+            <div class="col col-xl-6 col-12">
+              <label for="">descripcion</label>
+              
+
+              <input type="descripcion" id="descripcion" step="1" class="form-control"   onfocusout="validarDescripcion(this);"/>
+            </div>
+            <div class="col col-xl-6 col-12">
+              <label for=""> Cantidad</label>
+              <input type="text" id="cantidad" class="form-control" onfocusout="validarCantidad(this);" />
+            </div>
+            
+            <div class="col col-xl-6 col-12">
+              <label for="">Precio</label>
+              <input type="text" id="precio" class="form-control" onfocusout="validarPrecio(this);" />
+            </div>
+            
+            <div class="col col-xl-6 col-12">
+              <label for="">Iva</label>
+              <input type="text" id="porcentaje_iva" class="form-control" onfocusout="validarIva(this);" />
+            </div>
+            <div class="col col-xl-6 col-12">
+              <label for="">Descuento</label>
+              <input type="text" id="porcentaje_descuento" class="form-control" onfocusout="validarDescuento(this);" />
+            </div>
+            
+            <div class="col col-xl-6 col-12">
+              <label for="estado">Estado</label>
+                  <select id="estado" class="form-select">
+                  <option value="" selected disabled>Seleccione una opción</option>
+                  <option value="Activo">Activo</option>
+                  <option value="Desactivado">Desactivado</option>
+                  </select>
+              </div>
+          </div>
+          <button class="btn btn-success" onclick="limpiarProducto();">
+            Limpiar
+          </button>
+          <button type="button" class="btn btn-primary" onclick="actualizarProducto();">Actualizar</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+
+   <script src="./js/producto.js"></Script>
 </body>
 </html>

@@ -17,8 +17,8 @@ public class productos {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.UUID)
-	@Column(name="id_productos", nullable= false, length = 36)
-	private String id_productos;
+	@Column(name="id_producto", nullable= false, length = 36)
+	private String id_producto;
 	
 	
 	@Column(name="nombre_del_producto", nullable= true, length = 45)
@@ -44,16 +44,20 @@ public class productos {
 	private estado estado;
 
 	
+	
+
 	public productos() {
 		super();
 	}
 
 
-	public productos(String id_productos, String nombre_del_producto, String descripcion, int cantidad,
+
+
+	public productos(String id_producto, String nombre_del_producto, String descripcion, int cantidad,
 			BigDecimal precio, int porcentaje_iva, int porcentaje_descuento,
 			com.shoeStore.ShoeStore.models.estado estado) {
 		super();
-		this.id_productos = id_productos;
+		this.id_producto = id_producto;
 		this.nombre_del_producto = nombre_del_producto;
 		this.descripcion = descripcion;
 		this.cantidad = cantidad;
@@ -63,16 +67,21 @@ public class productos {
 		this.estado = estado;
 	}
 
-   
-	
-	public String getId_productos() {
-		return id_productos;
+
+
+
+	public String getId_producto() {
+		return id_producto;
 	}
 
 
-	public void setId_productos(String id_productos) {
-		this.id_productos = id_productos;
+
+
+	public void setId_producto(String id_producto) {
+		this.id_producto = id_producto;
 	}
+
+
 
 
 	public String getNombre_del_producto() {
@@ -80,9 +89,13 @@ public class productos {
 	}
 
 
+
+
 	public void setNombre_del_producto(String nombre_del_producto) {
 		this.nombre_del_producto = nombre_del_producto;
 	}
+
+
 
 
 	public String getDescripcion() {
@@ -90,9 +103,13 @@ public class productos {
 	}
 
 
+
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+
 
 
 	public int getCantidad() {
@@ -100,9 +117,13 @@ public class productos {
 	}
 
 
+
+
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+
+
 
 
 	public BigDecimal getPrecio() {
@@ -110,9 +131,13 @@ public class productos {
 	}
 
 
+
+
 	public void setPrecio(BigDecimal precio) {
 		this.precio = precio;
 	}
+
+
 
 
 	public int getPorcentaje_iva() {
@@ -120,9 +145,13 @@ public class productos {
 	}
 
 
+
+
 	public void setPorcentaje_iva(int porcentaje_iva) {
 		this.porcentaje_iva = porcentaje_iva;
 	}
+
+
 
 
 	public int getPorcentaje_descuento() {
@@ -130,9 +159,13 @@ public class productos {
 	}
 
 
+
+
 	public void setPorcentaje_descuento(int porcentaje_descuento) {
 		this.porcentaje_descuento = porcentaje_descuento;
 	}
+
+
 
 
 	public estado getEstado() {
@@ -140,9 +173,13 @@ public class productos {
 	}
 
 
+
+
 	public void setEstado(estado estado) {
 		this.estado = estado;
 	}
+
+
 
 
 	public boolean contieneCamposVacios() {

@@ -7,6 +7,7 @@ import com.shoeStore.ShoeStore.models.cliente;
 
 
 
+
 public interface IClienteService   {
 
 
@@ -15,7 +16,10 @@ public interface IClienteService   {
 	public Optional<cliente> findOne(String id);
 	public int delete (String id);
 	
-    public List<cliente> filtroCliente(String filtro);
+   
+	
+	public List<cliente> filtroCliente(String filtro);
+	
 	
 	 
 	

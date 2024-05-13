@@ -41,53 +41,51 @@
     </div>
 
     <div class="content">
-      <h1 style="margin-top: 100px">Agregar nuevo productos</h1>
+      <h1 style="margin-top: 100px">Agregar  venta</h1>
   
       <br>
       <div class="row">
        
         <div class="col col-xl-6 col-12">
-          <b><label for="nomproduct">Nombre del producto </label></b>
-          <input type="text" id="nombre_del_producto" class="form-control" onfocusout="validarNombreProducto(this);" />
+          <b><label for="nomproduct">Total de venta </label></b>
+          <input type="text" id="total" class="form-control" onfocusout="validarTotal(this);" />
         </div>
       
         <div class="col col-xl-6 col-12">
-          <b><label for="descri"> Descripción </label></b>
-          <input type="text" id="descripcion" class="form-control" onfocusout="validarDescripcion(this);" />
+            <label for="cliente" class="form-label">Cliente</label>
+            <select name="cliente" id="cliente" class="form-select" onfocusout="validarCliente(this);"> 
+              <option selected disabled value="">
+                Seleccione el cliente
+              </option>
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+          </div>
+        
+          <div class="col col-xl-6 col-12">
+            <label for="fecha_venta" class="form-label">Fecha de la venta</label>
+            <input type="date" class="form-control" name="fecha_venta" id="fecha_venta" step="1" onfocusout="validarFechaVenta(this);" >
         </div>
+
         <div class="col col-xl-6 col-12">
-          <b><label for="canti">Cantidad </label></b>
-          <input type="number" id="cantidad" class="form-control" onfocusout="validarCantidad(this);" />
+            <label for="estado" class="form-label">Estado</label>
+             <select name="estado" id="estado" class="form-select" onfocusout="validarEstado(this);">
+                <option selected disabled value=""> estado  que se encuentra la venta</option>
+                <option value="Activo">Paga</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Cancelada">Cancelada</option>
+                <option value="Borrador">Borrador</option>
+            </select>
         </div>
-        <div class="col col-xl-6 col-12">
-          <b><label for="precioo">Precio </label></b>
-          <input type="number" id="precio" class="form-control" onfocusout="validarPrecio(this);" />
-        </div>
-        <div class="col col-xl-6 col-12">
-          <b><label for="ivaa">Iva </label></b>
-          <input type="text" id="porcentaje_iva" class="form-control" onfocusout="validarIva(this);" />
-        </div>
-        <div class="col col-xl-6 col-12">
-          <b><label for="descuentoo">Descuento </label></b>
-          <input type="text" id="porcentaje_descuento" class="form-control" onfocusout="validarDescuento(this);" />
-        </div>
-        <div class="col col-xl-6 col-12">
-          <b><label for="estadoo">Estado </label></b>
-          <select name="" id="estado" class="form-select" onfocusout="validarEstado(this);">
-            <option value="" selected disabled style="font-weight: bold;">Selecciona una opción</option>
-            <option value="Activo" style="color:green; font-weight: bold;">Activo</option>
-            <option value="Desactivado" style="color: red; font-weight: bold;">Desactivado</option>
-        </select>
-          
-        </div>
+        
       </div>
       <br>
-      <button class="btn btn-success" onclick="registrarProducto();">
-        Agregar Producto
+      <button class="btn btn-success" onclick="RegistrarVenta();">
+        Agregar venta
       </button>
   </div>
 
-<Script src="./js/producto.js"></Script>
+<Script src="./js/venta.js"></Script>
 </body>
 
 </html>

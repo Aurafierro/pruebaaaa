@@ -11,9 +11,9 @@ public interface IProductosService {
 
 	public List<productos> findAll();
 
-	public Optional<productos> findOne(String id_productos);
+	public Optional<productos> findOne(String id_producto);
 
-	public int delete(String id_productos);
+	public int delete(String id_producto);
 
 	public List<productos> filtroProdutos(String filtro);
 

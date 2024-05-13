@@ -2,7 +2,8 @@ package com.shoeStore.ShoeStore.controller;
 
 
 
-import java.util.Optional;
+import java.math.BigDecimal;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shoeStore.ShoeStore.interfaceService.IProductosService;
 
-import com.shoeStore.ShoeStore.models.estado;
 import com.shoeStore.ShoeStore.models.productos;
 
 
@@ -33,14 +33,39 @@ public class productoscontroller {
 	   
 	  private IProductosService productosService;
 		
-	@PostMapping("/")
-	public ResponseEntity<Object> save(@ModelAttribute("productos") productos productos) {
-	 
-	              
+	 @PostMapping("/")
+	    public ResponseEntity<Object> save(
+	        @ModelAttribute("productos") productos productos
+	        ){
+
+	            if (productos.getNombre_del_producto().equals("")) {
+	                return new ResponseEntity<>("El nombre del producto es obligatorio", HttpStatus.BAD_REQUEST);
+	            }
+	            if (productos.getDescripcion().equals("")) {
+	                return new ResponseEntity<>("La descripción del producto es un campo obligatorio", HttpStatus.BAD_REQUEST);
+	            }
+	            if (productos.getCantidad()==0) {
+	                return new ResponseEntity<>("la cantidad es un campo oblogatorio", HttpStatus.BAD_REQUEST);
+	            }
+	            if (productos.getPrecio().compareTo(BigDecimal.ZERO) == 0) {
+	                return new ResponseEntity<>("Por favor, digite el precio del producto", HttpStatus.BAD_REQUEST);
+	            }
+
+	            if (productos.getPorcentaje_iva()==0) {
+	                return new ResponseEntity<>("El porcentaje del iva es  un campo obligatorio", HttpStatus.BAD_REQUEST);
+	            }
+	            if (productos.getPorcentaje_descuento()==0) {
+	                return new ResponseEntity<>("El porcentaje del descuento es  un campo obligatorio", HttpStatus.BAD_REQUEST);
+	            }
+	            if (productos.getEstado()==null) {
+	                return new ResponseEntity<>("El estado del producto es un campo  obligatorio", HttpStatus.BAD_REQUEST);
+	            }
 	        productosService.save(productos);
-			return new ResponseEntity<>(productos,HttpStatus.OK);
-		}
-		
+	        return new ResponseEntity<>(productos,HttpStatus.OK);
+	    }
+	
+	
+	
 		@GetMapping("/")
 		public ResponseEntity<Object>findAll(){
 			var ListaProducto = productosService.findAll();
@@ -56,34 +81,23 @@ public class productoscontroller {
 		
 		//@PathVariable recibe una variable por el enlace
 		
-		@GetMapping("/{id_productos}")
-		public ResponseEntity<Object> findOne ( @PathVariable String id_productos ){
-			var productos= productosService.findOne(id_productos);
+		@GetMapping("/{id_producto}")
+		public ResponseEntity<Object> findOne ( @PathVariable String id_producto ){
+			var productos= productosService.findOne(id_producto);
 			return new ResponseEntity<>(productos, HttpStatus.OK);
 		}
-		@DeleteMapping("/{id_produtos}")
-		public ResponseEntity<Object> delete(@PathVariable String id) {
-		    Optional<productos> optionalProductos = productosService.findOne(id);
-		    if (optionalProductos.isPresent()) {
-		        productos productos = optionalProductos.get();
-		        if (productos.getEstado() == estado.Activo) {
-		        	productos.setEstado(estado.Desactivado);
-		        	productosService.save(productos);
-		            return new ResponseEntity<>("Se ha desactivado correctamente", HttpStatus.OK);
-		        } else {
-		            return new ResponseEntity<>("El producto ya está desactivado", HttpStatus.BAD_REQUEST);
-		        }
-		    } else {
-		        return new ResponseEntity<>("No se ha encontrado el producto", HttpStatus.BAD_REQUEST);
-		    }
-		}
-
+		
+		  @DeleteMapping("/{id_producto}")
+			public ResponseEntity<Object> delete(@PathVariable String id_producto){
+				 productosService.delete(id_producto);
+						return new ResponseEntity<>("Producto eliminado con éxito",HttpStatus.OK);
+			}
 
 
 		
 			 
 		@PutMapping("/{id_producto}")
-		public ResponseEntity<Object> update(@PathVariable String id_productos, @ModelAttribute("producto") productos productosUpdate) {
+		public ResponseEntity<Object> update(@PathVariable String id_producto, @ModelAttribute("producto") productos productosUpdate) {
 		    
 		    // Verificar si hay campos vacíos
 		    
@@ -91,7 +105,7 @@ public class productoscontroller {
 		        return new ResponseEntity<>("Todos los campos son obligatorios", HttpStatus.BAD_REQUEST);
 		    }
 
-		    var producto = productosService.findOne(id_productos).orElse(null);
+		    var producto = productosService.findOne(id_producto).orElse(null);
 		    if (producto != null) {
 		        producto.setNombre_del_producto(productosUpdate.getNombre_del_producto());
 		        producto.setDescripcion(productosUpdate.getDescripcion());

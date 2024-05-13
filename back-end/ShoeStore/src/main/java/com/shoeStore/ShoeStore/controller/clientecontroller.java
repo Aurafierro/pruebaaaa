@@ -24,6 +24,7 @@ import com.shoeStore.ShoeStore.models.estado;
 
 
 
+
 @RequestMapping("/api/v1/cliente")
 @RestController
 @CrossOrigin
@@ -90,10 +91,10 @@ public class clientecontroller {
 		}
 		
 		//filtro
-		//filtro
+		
 		@GetMapping("/busquedafiltro/{filtro}")
 		public ResponseEntity<Object>findFiltro(@PathVariable String filtro){
-			var ListaCliente = clienteService.filtroCliente(filtro);
+			var ListaCliente = clienteService.filtroCliente(filtro );
 			return new ResponseEntity<>(ListaCliente, HttpStatus.OK);
 		}
 		
@@ -104,63 +105,59 @@ public class clientecontroller {
 			var cliente= clienteService.findOne(id_cliente);
 			return new ResponseEntity<>(cliente, HttpStatus.OK);
 		}
-		@DeleteMapping("/{id}")
-		public ResponseEntity<Object> delete(@PathVariable String id) {
-		    Optional<cliente> optionalCliente = clienteService.findOne(id);
-		    if (optionalCliente.isPresent()) {
-		        cliente cliente = optionalCliente.get();
-		        if (cliente.getEstado() == estado.Activo) {
-		            cliente.setEstado(estado.Desactivado);
-		            clienteService.save(cliente);
-		            return new ResponseEntity<>("Se ha desactivado correctamente", HttpStatus.OK);
-		        } else {
-		            return new ResponseEntity<>("El cliente ya está desactivado", HttpStatus.BAD_REQUEST);
-		        }
-		    } else {
-		        return new ResponseEntity<>("No se ha encontrado el cliente", HttpStatus.BAD_REQUEST);
-		    }
+		 //ELIMINADO FISICO:
+	    @DeleteMapping("/{id_cliente}")
+		public ResponseEntity<Object> delete(@PathVariable String id_cliente){
+			 clienteService.delete(id_cliente);
+					return new ResponseEntity<>("Cliente eliminado con éxito",HttpStatus.OK);
 		}
 
 
 
 		
-			 
-				@PutMapping("/{id_cliente}")
-				public ResponseEntity<Object> update(@PathVariable String id_cliente, @ModelAttribute("cliente") cliente clienteUpdate) {
-				    
-					// Verificar si hay campos vacíos
-					
-					if (clienteUpdate.contieneCamposVacios()) {
-						return new ResponseEntity<>("Todos los campos son obligatorios", HttpStatus.BAD_REQUEST);
-					}
+	    @PutMapping("/{id_cliente}")
+	    public ResponseEntity<Object> update(@PathVariable String id_cliente, @ModelAttribute("cliente") cliente clienteUpdate) {
+	        // Verificar si la solicitud contiene campos vacíos
+	        if (clienteUpdate.contieneCamposVacios()) {
+	            return new ResponseEntity<>("Todos los campos son obligatorios", HttpStatus.BAD_REQUEST);
+	        }
 
-					var cliente = clienteService.findOne(id_cliente).get();
-					if (cliente != null) {
-				        if (!cliente.getIdentificacion().equals(clienteUpdate.getIdentificacion())) {
-				            // El número de documento se está cambiando, verificar si ya está en uso
-				            List<cliente> clientesConMismoDocumento = clienteService.filtroCliente(clienteUpdate.getIdentificacion());
-				            if (!clientesConMismoDocumento.isEmpty()) {
-				                // Si hay otros médicos con el mismo número de documento, devuelve un error
-				                return new ResponseEntity<>("El cliente ya tiene un ingreso activo", HttpStatus.BAD_REQUEST);
-				            }
-				        }
+	        // Buscar el cliente por su ID
+	        Optional<cliente> optionalCliente = clienteService.findOne(id_cliente);
+	        if (optionalCliente.isPresent()) {
+	            cliente cliente = optionalCliente.get();
 
+	            // Verificar si la identificación del cliente ha cambiado
+	            if (!cliente.getIdentificacion().equals(clienteUpdate.getIdentificacion())) {
+	                List<cliente> clientesConMismoDocumento = clienteService.filtroCliente(clienteUpdate.getIdentificacion());
+	                if (!clientesConMismoDocumento.isEmpty()) {
+	                    return new ResponseEntity<>("El cliente ya tiene un ingreso activo", HttpStatus.BAD_REQUEST);
+	                }
+	            }
 
-						cliente.setTipo_documento(clienteUpdate.getTipo_documento());
-						cliente.setIdentificacion(clienteUpdate.getIdentificacion());
-						cliente.setNombre(clienteUpdate.getNombre());
-						
-						cliente.setApellido(clienteUpdate.getApellido());
-						cliente.setTelefono(clienteUpdate.getTelefono());
-						cliente.setCiudad(clienteUpdate.getCiudad());
-						cliente.setDireccion(clienteUpdate.getDireccion());
-						cliente.setEstado(clienteUpdate.getEstado());
+	            // Verificar que la ciudad no sea nula
+	            if (clienteUpdate.getCiudad() == null || clienteUpdate.getCiudad().isEmpty()) {
+	                return new ResponseEntity<>("La ciudad es un campo obligatorio", HttpStatus.BAD_REQUEST);
+	            }
 
-						clienteService.save(cliente);
-						return new ResponseEntity<>("Guardado", HttpStatus.OK);
+	            // Actualizar los datos del cliente
+	            cliente.setTipo_documento(clienteUpdate.getTipo_documento());
+	            cliente.setIdentificacion(clienteUpdate.getIdentificacion());
+	            cliente.setNombre(clienteUpdate.getNombre());
+	            cliente.setApellido(clienteUpdate.getApellido());
+	            cliente.setTelefono(clienteUpdate.getTelefono());
+	            cliente.setCiudad(clienteUpdate.getCiudad());
+	            cliente.setDireccion(clienteUpdate.getDireccion());
+	            cliente.setEstado(clienteUpdate.getEstado());
 
-					} else {
-						return new ResponseEntity<>("Error cliente no encontrado", HttpStatus.BAD_REQUEST);
-					}
-				}
-		}
+	            // Guardar los cambios en la base de datos
+	            clienteService.save(cliente);
+	            return new ResponseEntity<>("Guardado", HttpStatus.OK);
+	        } else {
+	            return new ResponseEntity<>("Error cliente no encontrado", HttpStatus.BAD_REQUEST);
+	        }
+	    }
+
+	
+
+}

@@ -1,5 +1,6 @@
 package com.shoeStore.ShoeStore.models;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -12,81 +13,97 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-@Entity
+@Entity(name="venta")
 public class venta {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.UUID)
-	@Column(name="id_venta", nullable= false, length = 36)
-	private String id_venta;
+	 @Id
+	    @GeneratedValue(strategy = GenerationType.UUID)
+	    @Column(name = "id_venta", nullable = false, length = 36)
+	    private String id_venta; 
 
-	@ManyToOne
-	@JoinColumn (name="id_cliente")
-	private cliente cliente;
-	
-	
-	@Column(name="total", nullable= false, length = 45)
-	private String total;
+	    @Column(name = "total", nullable = false, length = 45)
+	    private String total; 
 
-	@Column(name="estado", nullable= false, length = 11)
-	private estado_venta estado;
-	
-	@Column(name="fecha_venta", nullable=false)
-	private Date fecha_venta;
+	    @Column (name = "fecha_venta", nullable = false)
+	    private LocalDate fecha_venta;
 
-	public venta() {
-		super();
-	}
+	    @Column(name = "estado", nullable = false, length = 10)
+	    private estado estado; 
 
-	public venta(String id_venta, com.shoeStore.ShoeStore.models.cliente cliente, String total, estado_venta estado,
-			Date fecha_venta) {
-		super();
-		this.id_venta = id_venta;
-		this.cliente = cliente;
-		this.total = total;
-		this.estado = estado;
-		this.fecha_venta = fecha_venta;
-	}
 
-	public String getId_venta() {
-		return id_venta;
-	}
+	    @ManyToOne
+	    @JoinColumn(name="id_cliente")
+	    private cliente cliente;
 
-	public void setId_venta(String id_venta) {
-		this.id_venta = id_venta;
-	}
 
-	public cliente getCliente() {
-		return cliente;
-	}
+		public venta() {
+			super();
+		}
 
-	public void setCliente(cliente cliente) {
-		this.cliente = cliente;
-	}
 
-	public String getTotal() {
-		return total;
-	}
+		public venta(String id_venta, String total, LocalDate fecha_venta, com.shoeStore.ShoeStore.models.estado estado,
+				com.shoeStore.ShoeStore.models.cliente cliente) {
+			super();
+			this.id_venta = id_venta;
+			this.total = total;
+			this.fecha_venta = fecha_venta;
+			this.estado = estado;
+			this.cliente = cliente;
+		}
 
-	public void setTotal(String total) {
-		this.total = total;
-	}
 
-	public estado_venta getEstado() {
-		return estado;
-	}
+		public String getId_venta() {
+			return id_venta;
+		}
 
-	public void setEstado(estado_venta estado) {
-		this.estado = estado;
-	}
 
-	public Date getFecha_venta() {
-		return fecha_venta;
-	}
+		public void setId_venta(String id_venta) {
+			this.id_venta = id_venta;
+		}
 
-	public void setFecha_venta(Date fecha_venta) {
-		this.fecha_venta = fecha_venta;
-	}
+
+		public String getTotal() {
+			return total;
+		}
+
+
+		public void setTotal(String total) {
+			this.total = total;
+		}
+
+
+		public LocalDate getFecha_venta() {
+			return fecha_venta;
+		}
+
+
+		public void setFecha_venta(LocalDate fecha_venta) {
+			this.fecha_venta = fecha_venta;
+		}
+
+
+		public estado getEstado() {
+			return estado;
+		}
+
+
+		public void setEstado(estado estado) {
+			this.estado = estado;
+		}
+
+
+		public cliente getCliente() {
+			return cliente;
+		}
+
+
+		public void setCliente(cliente cliente) {
+			this.cliente = cliente;
+		}
+
+
+  
+
 	
 	
 }
